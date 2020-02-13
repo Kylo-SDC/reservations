@@ -27,25 +27,41 @@ const getReservations = async (restaurantId, dateTime, callback) => {
   );
 };
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+// new DB methods
 
-const getRestaurantId = (restaurantId, callback) => {
+const getReservation = (id, callback) => {
   const queryStr = 'SELECT * FROM reservation WHERE id = ?';
-  connection.query(queryStr, [restaurantId], (error, results, fields) => {
+  connection.query(queryStr, [id], (error, results, fields) => {
     if (error) {
       throw error;
     }
     callback(error, results);
   });
-}
+};
 
 const postReservation = (restaurantId, dateTime, callback) => {
-  const queryStr = 'INSERT INTO reservation '
-}
+  const queryStr = 'INSERT INTO reservation (restaurantId, dateTime) VALUES (?, ?)';
+  connection.query(queryStr, [restaurantId, dateTime], (error, results, fields) => {
+    if (error) {
+      throw error;
+    }
+    callback(error, results);
+  });
+};
 
-const deleteRestaurantId = (restaurantId, callback) => {
-  const queryStr = 'DELETE FROM reservation WHERE restaurant_id = ?';
-  connection.query(queryStr, [restaurantId], (error, results, fields) => {
+const updateReservation = (id, newDateTime, callback) => {
+  const queryStr = 'UPDATE reservation SET dateTime = ? WHERE id = ?';
+  connection.query(queryStr, [newDateTime, id], (error, results, fields) => {
+    if (error) {
+      throw error;
+    }
+    callback(error, results);
+  });
+};
+
+const deleteReservation = (id, callback) => {
+  const queryStr = 'DELETE FROM reservation WHERE id = ?';
+  connection.query(queryStr, [id], (error, results, fields) => {
     if (error) {
       throw error;
     }
@@ -53,8 +69,13 @@ const deleteRestaurantId = (restaurantId, callback) => {
   });
 }
 
+module.exports = {
+  getReservations,
+  getReservation,
+  postReservation,
+  updateReservation,
+  deleteReservation,
+};
 
-
-
-module.exports.getReservations = getReservations;
-module.exports.connection = connection;
+// module.exports.getReservations = getReservations;
+// module.exports.connection = connection;

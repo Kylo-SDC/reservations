@@ -11,7 +11,7 @@ const Reservation = ({ restaurantId }) => {
   const [dateTime] = useState(new Date());
 
   fetch(`http://localhost:4444/api/reservations/${restaurantId}/dateTime/${encodeURIComponent(dateTime)}`)
-    .then((response) => {console.log(response); response.json()})
+    .then((response) => {console.log(response); console.log(response.url); response.json()})
 
     .then((myJson) => setTaken(myJson.length));
 
