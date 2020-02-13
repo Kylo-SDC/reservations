@@ -4,6 +4,7 @@ const credentials = require('./credentials');
 const connection = mysql.createConnection(credentials);
 connection.connect();
 
+
 const generateReservations = () => {
   const reservations = [];
   for (let i = 0; i < 100; i += 1) {
