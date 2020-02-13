@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const mysql = require('mysql');
 const credentials = require('./credentials');
 
@@ -25,6 +26,35 @@ const getReservations = async (restaurantId, dateTime, callback) => {
     },
   );
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const getRestaurantId = (restaurantId, callback) => {
+  const queryStr = 'SELECT * FROM reservation WHERE id = ?';
+  connection.query(queryStr, [restaurantId], (error, results, fields) => {
+    if (error) {
+      throw error;
+    }
+    callback(error, results);
+  });
+}
+
+const postReservation = (restaurantId, dateTime, callback) => {
+  const queryStr = 'INSERT INTO reservation '
+}
+
+const deleteRestaurantId = (restaurantId, callback) => {
+  const queryStr = 'DELETE FROM reservation WHERE restaurant_id = ?';
+  connection.query(queryStr, [restaurantId], (error, results, fields) => {
+    if (error) {
+      throw error;
+    }
+    callback(error, results);
+  });
+}
+
+
+
 
 module.exports.getReservations = getReservations;
 module.exports.connection = connection;

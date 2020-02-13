@@ -10,3 +10,6 @@ CREATE TABLE reservation (
   dateTime DATETIME,
   PRIMARY KEY (ID)
 );
+
+
+-- mysql -u root < schema.sql

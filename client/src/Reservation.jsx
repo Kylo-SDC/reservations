@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import PropTypes from 'prop-types';
 import './Reservation.css';
 import React, { useState } from 'react';
@@ -9,7 +11,8 @@ const Reservation = ({ restaurantId }) => {
   const [dateTime] = useState(new Date());
 
   fetch(`http://localhost:4444/api/reservations/${restaurantId}/dateTime/${encodeURIComponent(dateTime)}`)
-    .then((response) => response.json())
+    .then((response) => {console.log(response); response.json()})
+
     .then((myJson) => setTaken(myJson.length));
 
   function formatAMPM(date) {
