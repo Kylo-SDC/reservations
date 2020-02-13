@@ -2,6 +2,7 @@ const cors = require('cors');
 const path = require('path');
 const express = require('express');
 const db = require('../database/index.js');
+
 const app = express();
 
 
@@ -17,6 +18,7 @@ app.get('/?id=:restaurantId', (req, res) => {
 });
 
 app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
+  console.log(req.params.dateTime);
   db.getReservations(
     req.params.restaurantId,
     req.params.dateTime,
@@ -29,9 +31,8 @@ app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
 app.get('/api/reservations/:id', (req, res) => {
   db.getReservation(req.params.id, (err, results) => {
     if (err) {
-      console.log('error getting id!', err);
+      console.log('error getting reservation!', err);
     } else {
-      console.log('successful get id!');
       res.status(200).json(results);
     }
   });
@@ -42,7 +43,6 @@ app.post('/api/reservations/', (req, res) => {
     if (err) {
       console.log('error posting reservation', err);
     } else {
-      console.log('successful post!');
       res.status(201).json(results);
     }
   });
@@ -51,7 +51,7 @@ app.post('/api/reservations/', (req, res) => {
 app.put('/api/reservations/:id', (req, res) => {
   db.updateReservation(req.params.id, req.body.dateTime, (err, results) => {
     if (err) {
-      console.log('error updating id');
+      console.log('error updating reservation');
     } else {
       res.status(201).json(results);
     }
@@ -61,9 +61,8 @@ app.put('/api/reservations/:id', (req, res) => {
 app.delete('/api/reservations/:id', (req, res) => {
   db.deleteReservation(req.params.id, (err, results) => {
     if (err) {
-      console.log('error deleting id', err);
+      console.log('error deleting reservation', err);
     } else {
-      console.log('successful delete id');
       res.status(200).json(results);
     }
   });

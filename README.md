@@ -1,4 +1,4 @@
-### Opentable Reservations Module
+# Opentable Reservations Module
 
 Reservations input component made using React.
 
@@ -19,16 +19,28 @@ npm start
 ```
 ## API
 **POST** - create a new reservation and datetime\
-**'/api/reservations/'**
+Accepts a body request of restaurantId and dateTime, sends back 201 created response.
+```
+'/api/reservations/'
+```
 
 **GET** - retrieve a single reservation and its datetimes\
-**'/api/reservations/:id'**
+Accepts a parameter request for id and sends back 200 success response.
+```
+'/api/reservations/:id'
+```
 
 **PUT** - update an existing reservation's datetimes\
-**'/api/reservations/:id'**
+Accepts a parameter request for id and body request for dateTime, sends back 201 created response.
+```
+'/api/reservations/:id'
+```
 
 **DELETE** - delete a reservation\
-**'/api/reservations/:id'**
+Accepts a parameter request for id and sends back 200 success response.
 
+```
+'/api/reservations/:id'
+```
 
 
