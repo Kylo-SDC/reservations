@@ -11,10 +11,11 @@ const knex = require('knex')(options);
 
 knex.schema.dropTableIfExists('reservation')
   .createTable('reservation', (table) => {
-    table.increments('id')
-    table.integer('restaurantId').notNullable()
-    table.dateTime('dateTime')
-  }).then(() => console.log('table created'))
+    table.increments('id').unsigned();
+    table.integer('restaurantId').notNullable();
+    table.dateTime('dateTime');
+  })
+  .then(() => console.log('table created'))
   .catch((err) => {
     console.log(err);
   })

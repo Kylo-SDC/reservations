@@ -8,7 +8,7 @@ const generateRestaurants = (numOfRestaurants) => {
   // write to location reservations.csv
   const writeReservations = fs.createWriteStream('reservations.csv');
   // set restaurant id to the input value passed into the function later to be consumed
-  let restaurantId = numOfRestaurants + 1;
+  let restaurantId = numOfRestaurants;
   // set number of reservations created per restaurant ID
   let reservationsNum = 5;
   // set reservations id equal to the total of restaurants and the reservations attached to them
@@ -29,7 +29,7 @@ const generateRestaurants = (numOfRestaurants) => {
 
       // decrement total number of reservations with each iteration
       reservationsId -= 1;
-      // decrement number of reservations per restaurant
+      // decrement number of reservations per restaurant with each iteration
       reservationsNum -= 1;
       // after all reservations have been assigned to a given restaurantId, then we decrement restaurantId
       if (reservationsNum === 0) {
@@ -39,9 +39,7 @@ const generateRestaurants = (numOfRestaurants) => {
       }
 
       // if restaurantIds have been fully decremented
-      if (restaurantId === 0) {
-        // end timer on seed function and log in milliseconds time for completion
-        console.timeEnd('reservations');
+      if (restaurantId < 0) {
         // exit out of writing
         writeReservations.end();
       } else {
@@ -61,7 +59,8 @@ const generateRestaurants = (numOfRestaurants) => {
 
 // begin timer on seed function
 console.time('reservations');
-generateRestaurants(100);
+generateRestaurants(1000000);
+console.timeEnd('reservations');
 
       // enter for loop (will provide the number of restaurant ids we want)
       // initialize dateTime var set to new Date
