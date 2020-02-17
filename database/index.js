@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 const mysql = require('mysql');
-const credentials = require('./credentials');
+
+const credentials = {
+  host: process.env.PORT || 'localhost',
+  user: process.env.USER || 'root',
+  database: process.env.DATABASE || 'reservation',
+};
 
 const connection = mysql.createConnection(credentials);
 connection.connect();

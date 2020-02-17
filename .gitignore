@@ -3,3 +3,4 @@ coverage/
 credentials.js
 bundle.js
 reservations.csv
+.env
