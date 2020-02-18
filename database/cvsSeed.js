@@ -25,7 +25,7 @@ const generateRestaurants = (numOfRestaurants) => {
       const restaurants = {};
       restaurants.id = reservationsId;
       restaurants.restaurantId = restaurantId;
-      restaurants.dateTime = faker.date.recent();
+      restaurants.dateTime = faker.date.future(1);
 
       // decrement total number of reservations with each iteration
       reservationsId -= 1;
@@ -36,6 +36,11 @@ const generateRestaurants = (numOfRestaurants) => {
         restaurantId -= 1;
         // reestablish number of reservations to be assigned to the next restaurantID
         reservationsNum = 5;
+      }
+
+      if (restaurantId === 0) {
+        console.timeEnd('reservations');
+        console.log(restaurantId);
       }
 
       // if restaurantIds have been fully decremented
@@ -59,32 +64,4 @@ const generateRestaurants = (numOfRestaurants) => {
 
 // begin timer on seed function
 console.time('reservations');
-generateRestaurants(1000000);
-console.timeEnd('reservations');
-
-      // enter for loop (will provide the number of restaurant ids we want)
-      // initialize dateTime var set to new Date
-        // enter for loop (will provide the number of days we want to establish), reintialize dateTime hours and minutes to 0
-          // next loop will indicate the hours/minutes on each day to be set, reintialize dateTime var incrementing by 15 minutes
-          // write to file the id, restaurantId, and dateTime
-          // decrement id,
-
-
-// const generateReservations = () => {
-//   const reservations = [];
-//   for (let i = 0; i < 100; i += 1) {
-//     const dateTime = new Date();
-//     dateTime.setDate(dateTime.getDate() - 1);
-//     for (let j = 0; j < 30; j += 1) {
-//       dateTime.setDate(dateTime.getDate() + 1);
-//       dateTime.setHours(0, 0, 0, 0);
-//       for (let k = 0; k < 96; k += 1) {
-//         dateTime.setMinutes(dateTime.getMinutes() + 15);
-//         if (Math.random() > 0.5) {
-//           reservations.push([null, i, new Date(dateTime)]);
-//         }
-//       }
-//     }
-//   }
-//   return reservations;
-// };
+generateRestaurants(10000000);

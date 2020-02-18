@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
+require('dotenv').config();
 const mysql = require('mysql');
 
 const credentials = {
-  host: process.env.PORT || 'localhost',
-  user: process.env.USER || 'root',
-  database: process.env.DATABASE || 'reservation',
+  host: process.env.PORT,
+  user: process.env.USER,
+  database: process.env.DATABASE,
 };
 
 const connection = mysql.createConnection(credentials);

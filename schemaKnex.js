@@ -1,9 +1,11 @@
+require('dotenv').config({ debug: process.env.DEBUG })
+
 const options = {
   client: 'mysql',
   connection: {
-    host: process.env.PORT || 'localhost',
-    user: process.env.USER || 'root',
-    database: process.env.DATABASE || 'reservation',
+  host: 'localhost',
+  user: 'root',
+  database: 'reservation',  
   },
 };
 
