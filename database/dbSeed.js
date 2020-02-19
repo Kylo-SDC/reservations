@@ -11,30 +11,29 @@ const options = {
 
 const knex = require('knex')(options);
 
-const seed = async (restaurantsTotal) => {
+const seed = async (restaurantsTotal, reservationsPer) => {
   await knex('reservation').del();
 
   let reservations = [];
-  let dateTime = new Date();
-  // set date 1 day prior to current day, so upon increment in loop starts back at present
-  dateTime.setDate(dateTime.getDate() - 1);
-
-  for (let i = 1; i <= restaurantsTotal; i += 1) {
-    dateTime.setDate(dateTime.getDate() + 1);
-    dateTime.setHours(0, 0, 0, 0);
-    // sets number of reservations per restaurant ID
-    for (let j = 0; j < 10; j += 1) {
-      dateTime.setMinutes(dateTime.getMinutes() + 15);
-      // reservation times spread throughout the day
-      if (Math.random() > 0.5) {
+  for (let i = 1; i <= restaurantId; i += 1) {
+    const dateTime = new Date();
+    dateTime.setDate(dateTime.getDate() - 1);
+    // sets number of calendar days per restaurant ID to have reservations
+    for (let j = 0; j < days; j++) {
+      dateTime.setDate(dateTime.getDate() + 1);
+      dateTime.setHours(0, 0, 0, 0);
+      // sets number of reservations per day day per restaurant ID
+      for (let k = 0; k < reservations; k += 1) {
+        dateTime.setMinutes(dateTime.getMinutes() + 30);
+        // reservation times randomly spread throughout the day
+        if (Math.random() > 0.5) {
         reservations.push({restaurantId:i, dateTime: new Date(dateTime)});
       }
-    }
-
-    // write to file with upon every 10000 items in reservations array
-    if (i % 10000 === 0) {
-      await knex('reservation').insert(reservations);
-      reservations = [];
+      // write to file with upon every 10000 items in reservations array
+      if (i % 10000 === 0) {
+        await knex('reservation').insert(reservations);
+        reservations = [];
+      }
     }
   }
   console.timeEnd('reservations');
@@ -43,7 +42,7 @@ const seed = async (restaurantsTotal) => {
 };
 
 console.time('reservations');
-seed(100);
+seed(5000000, 30);
 
 
 

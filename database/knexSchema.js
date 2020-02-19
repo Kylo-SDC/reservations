@@ -1,5 +1,3 @@
-require('dotenv').config({ debug: process.env.DEBUG })
-
 const options = {
   client: 'mysql',
   connection: {

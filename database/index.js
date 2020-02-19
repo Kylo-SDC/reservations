@@ -3,9 +3,9 @@ require('dotenv').config();
 const mysql = require('mysql');
 
 const credentials = {
-  host: process.env.PORT,
-  user: process.env.USER,
-  database: process.env.DATABASE,
+  host: 'localhost',
+  user: 'root',
+  database: 'reservation',
 };
 
 const connection = mysql.createConnection(credentials);
