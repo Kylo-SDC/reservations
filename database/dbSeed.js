@@ -1,18 +1,28 @@
 require('dotenv').config();
 
+// const options = {
+//   client: 'mysql',
+//   connection: {
+//     host: 'localhost',
+//     user: 'root',
+//     database: 'reservation',
+//   },
+// };
+
 const options = {
-  client: 'mysql',
+  client: 'pg',
   connection: {
     host: 'localhost',
-    user: 'root',
-    database: 'reservation',
+    user: 'postgres',
+    password: 'postgres',
+    database: 'reservations',
   },
 };
 
 const knex = require('knex')(options);
 
-const seed = async (restaurantId = 10000000, days = 1, reservations = 30) => {
-  await knex('reservation').del();
+const seed = async (restaurantId = 1000, days = 2, reservations = 30) => {
+  await knex('reservations').del();
 
   let reservationsArray = [];
   for (let i = 1; i <= restaurantId; i += 1) {
@@ -24,16 +34,17 @@ const seed = async (restaurantId = 10000000, days = 1, reservations = 30) => {
       dateTime.setHours(0, 0, 0, 0);
       // sets number of reservations per day day per restaurant ID
       for (let k = 0; k < reservations; k += 1) {
-        dateTime.setMinutes(dateTime.getMinutes() + 45);
+        dateTime.setMinutes(dateTime.getMinutes() + 15);
         // reservation times randomly spread throughout the day
         if (Math.random() > 0.5) {
           reservationsArray.push({restaurantId:i, dateTime: new Date(dateTime)});
         }
         // write to file with upon every 10000 items in reservations array
-        if (i % 10000 === 0) {
-          await knex('reservation').insert(reservationsArray);
+        if (i % 10 === 0) {
+          await knex('reservations').insert(reservationsArray);
           reservations = [];
         }
+      }
     }
   }
   console.timeEnd('reservations');
@@ -44,10 +55,8 @@ const seed = async (restaurantId = 10000000, days = 1, reservations = 30) => {
 console.time('reservations');
 seed();
 
-
-
 // const seed = async (restaurantsTotal) => {
-//   await knex('reservation').del();
+//   await knex('reservations').del();
 
 //   let reservations = [];
 
@@ -56,8 +65,8 @@ seed();
 //       reservations.push({restaurantId:i, dateTime: new Date()});
 //     }
 
-//     if (i % 10000 === 0) {
-//       await knex('reservation').insert(reservations);
+//     if (i % 100 === 0) {
+//       await knex('reservations').insert(reservations);
 //       reservations = [];
 //     }
 //   }
@@ -65,3 +74,6 @@ seed();
 //   console.log('finished seeding database');
 //   knex.destroy();
 // };
+
+// console.time('reservations');
+// seed(1000000);

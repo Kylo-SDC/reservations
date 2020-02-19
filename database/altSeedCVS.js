@@ -1,11 +1,11 @@
 const fs = require('fs');
-const writable = fs.createWriteStream('reservations.csv');
+const writable = fs.createWriteStream('reservationz.csv');
 writable.write(`id, restaurantId, dateTime \n`);
 
 const dateTime = new Date();
 dateTime.setDate(dateTime.getDate() - 1);
 
-const seedCVS = async (restaurantId = 10000000, days = 1, reservations = 25, id = 0) => {
+const seedCVS = async (restaurantId = 5, days = 1, reservations = 25, id = 0) => {
 
   for (let i = 1; i <= restaurantId; i += 1) {
     const dateTime = new Date();

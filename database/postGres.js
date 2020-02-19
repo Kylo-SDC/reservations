@@ -1,28 +1,50 @@
-const { Pool, Client } = require('pg');
 
+const { Pool, Client } = require('pg')
+const connectionString = 'postgresql://postgres:postgres@localhost:5432/reservations';
 
 const pool = new Pool({
-  user: 'root',
-  host: 'localhost',
-  database: 'reservations',
-  port: 3211,
+  connectionString: connectionString,
 });
 
-pool.query('SELECT NOW()', (err, res) => {
+pool.query('SELECT * from reservations', (err, res) => {
   console.log(err, res);
   pool.end();
 });
 
-const client = new Client({
-  user: 'root',
-  host: 'localhost',
-  database: 'reservations',
-  port: 3211,
-});
 
-client.connect();
 
-client.query('SELECT NOW()', (err, res) => {
-  console.log(err, res);
-  client.end();
-});
+// const { Pool, Client } = require('pg');
+
+
+// const pool = new Pool({
+//   host: 'localhost',
+//   user: 'postgres',
+//   password: 'postgres',
+//   database: 'reservations',
+//   port: 5432,
+// });
+
+// pool.query('SELECT * from reservations', (err, res) => {
+//   console.log(err, res);
+//   pool.end();
+// });
+
+// const client = new Client({
+//   host: 'localhost',
+//   user: 'postgres',
+//   password: 'postgres',
+//   database: 'reservations',
+// });
+
+// client.connect()
+//   .then(() => console.log('successful connection!'))
+//   .then(() => client.query('SELECT * from reservations'))
+//   .then(results => console.table(results.rows))
+//   .catch(e => console.log(e))
+//   .finally(() => client.end());
+
+
+// client.query('SELECT * from reservations', (err, res) => {
+//   console.log(err, res);
+//   client.end();
+// });
