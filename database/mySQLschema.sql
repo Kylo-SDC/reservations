@@ -1,16 +1,16 @@
 
--- DROP TABLE IF EXISTS reservations;
+DROP TABLE IF EXISTS reservations;
 
--- CREATE TABLE reservations (
+CREATE TABLE reservations (
 
---   id BIGINT,
---   restaurantId BIGINT NOT NULL PRIMARY KEY,
---   dateTime text
+  id BIGINT PRIMARY KEY,
+  restaurantId BIGINT NOT NULL,
+  dateTime TIMESTAMP NOT NULL
 
--- )
+)
 
-COPY reservations(id, restaurantId)
-FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/reservation.csv' DELIMITER ',' CSV HEADER;
+COPY reservations(id, restaurantId, dateTime)
+FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/reservations.csv' DELIMITER ',' CSV HEADER;
 
 -- psql postgresql://postgres:postgres@localhost/reservations -f schema.sql
 -- psql -f database/schema.sql reservations

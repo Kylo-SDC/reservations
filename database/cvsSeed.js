@@ -1,16 +1,28 @@
 /* eslint-disable max-len */
 const fs = require('fs');
-const faker = require('faker');
+// const faker = require('faker');
 
 
-const generateRestaurants = (numOfRestaurants) => {
+const date = new Date().toString().slice(0, 10);
+
+const generateTime = () => {
+
+  // adds 0 in front of single digits
+  const hour = Math.floor(Math.random() * 24).toString().padStart(2, '0');
+  const min = Math.floor(Math.random() * 60).toString().padStart(2, '0');
+
+  return `${hour}:${min}:00`;
+};
+
+
+const generateRestaurants = (restaurantsNum) => {
 
   // write to location reservations.csv
-  const writeReservations = fs.createWriteStream('reservations.csv');
+  const writeReservations = fs.createWriteStream('reservation.csv');
   // set restaurant id to the input value passed into the function later to be consumed
-  let restaurantId = numOfRestaurants;
+  let restaurantId = restaurantsNum;
   // set number of reservations created per restaurant ID
-  let reservationsNum = 5;
+  let reservationsNum = 15;
   // set reservations id equal to the total of restaurants and the reservations attached to them
   let reservationsId = restaurantId * reservationsNum;
   // set boolean to track whether can write to file
@@ -25,7 +37,7 @@ const generateRestaurants = (numOfRestaurants) => {
       const restaurants = {};
       restaurants.id = reservationsId;
       restaurants.restaurantId = restaurantId;
-      restaurants.dateTime = faker.date.future(1);
+      restaurants.dateTime = `${date} ${generateTime()}`;
 
       // decrement total number of reservations with each iteration
       reservationsId -= 1;
@@ -35,14 +47,11 @@ const generateRestaurants = (numOfRestaurants) => {
       if (reservationsNum === 0) {
         restaurantId -= 1;
         // reestablish number of reservations to be assigned to the next restaurantID
-        reservationsNum = 5;
+        reservationsNum = 15;
       }
-
       if (restaurantId === 0) {
         console.timeEnd('reservations');
-        console.log(restaurantId);
       }
-
       // if restaurantIds have been fully decremented
       if (restaurantId < 0) {
         // exit out of writing

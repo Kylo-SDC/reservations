@@ -21,7 +21,7 @@ const options = {
 
 const knex = require('knex')(options);
 
-const seed = async (restaurantId = 1000, days = 2, reservations = 30) => {
+const seed = async (restaurantId = 10000000, days = 2, reservations = 30) => {
   await knex('reservations').del();
 
   let reservationsArray = [];
@@ -40,7 +40,7 @@ const seed = async (restaurantId = 1000, days = 2, reservations = 30) => {
           reservationsArray.push({restaurantId:i, dateTime: new Date(dateTime)});
         }
         // write to file with upon every 10000 items in reservations array
-        if (i % 10 === 0) {
+        if (i % 10000 === 0) {
           await knex('reservations').insert(reservationsArray);
           reservations = [];
         }

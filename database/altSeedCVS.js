@@ -5,7 +5,7 @@ writable.write(`id, restaurantId, dateTime \n`);
 const dateTime = new Date();
 dateTime.setDate(dateTime.getDate() - 1);
 
-const seedCVS = async (restaurantId = 5, days = 1, reservations = 25, id = 0) => {
+const seedCVS = async (restaurantId = 10000000, days = 1, reservations = 25, id = 0) => {
 
   for (let i = 1; i <= restaurantId; i += 1) {
     const dateTime = new Date();
@@ -16,13 +16,13 @@ const seedCVS = async (restaurantId = 5, days = 1, reservations = 25, id = 0) =>
       dateTime.setHours(0, 0, 0, 0);
       // sets number of reservations per day day per restaurant ID
       for (let k = 0; k < reservations; k += 1) {
-        dateTime.setMinutes(dateTime.getMinutes() + 30);
+        dateTime.setMinutes(dateTime.getMinutes() + 45);
         // reservation times randomly spread throughout the day
         if (Math.random() > 0.5) {
           id += 1;
-          if (!writable.write(`${id}, ${i}, ${new Date(dateTime)}\n`)) {
+          if (!writable.write(`${id}, ${i}, ${new Date(dateTime).toString().slice(0, 24)}\n`)) {
             await new Promise((resolve) => writable.once('drain', resolve));
-          };
+          }
         }
       }
     }

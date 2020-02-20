@@ -2,5 +2,8 @@ node_modules/
 coverage/
 credentials.js
 bundle.js
+reservation.csv
+reservations.csv
+reservation.csv
 reservations.csv
 .env
