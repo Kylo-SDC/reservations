@@ -9,6 +9,9 @@ require('dotenv').config();
 //   },
 // };
 
+
+const date = new Date().toISOString().slice(0, 10);
+
 const options = {
   client: 'pg',
   connection: {
@@ -21,8 +24,8 @@ const options = {
 
 const knex = require('knex')(options);
 
-const seed = async (restaurantId = 10000000, days = 2, reservations = 30) => {
-  await knex('reservations').del();
+const seed = async (restaurantId = 10000000, days = 1, reservations = 30) => {
+  await knex('reservationss').del();
 
   let reservationsArray = [];
   for (let i = 1; i <= restaurantId; i += 1) {
@@ -37,22 +40,22 @@ const seed = async (restaurantId = 10000000, days = 2, reservations = 30) => {
         dateTime.setMinutes(dateTime.getMinutes() + 15);
         // reservation times randomly spread throughout the day
         if (Math.random() > 0.5) {
-          reservationsArray.push({restaurantId:i, dateTime: new Date(dateTime)});
+          reservationsArray.push({ restaurantId: i, dateTime: new Date(dateTime).toISOString() });
         }
         // write to file with upon every 10000 items in reservations array
         if (i % 10000 === 0) {
-          await knex('reservations').insert(reservationsArray);
+          await knex('reservationss').insert(reservationsArray);
           reservations = [];
         }
       }
     }
   }
-  console.timeEnd('reservations');
+  console.timeEnd('reservationss');
   console.log('finished seeding database');
   knex.destroy();
 };
 
-console.time('reservations');
+console.time('reservationss');
 seed();
 
 // const seed = async (restaurantsTotal) => {

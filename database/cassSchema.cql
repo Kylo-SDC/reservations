@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS reservations (
   PRIMARY KEY(id)
 );
 
-COPY reservations (id, restaurantId, dateTime)
-FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/reservationzz.csv' WITH HEADER=TRUE;
+COPY reservations (id,restaurantId,dateTime)
+FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/reservationz.csv' WITH HEADER=TRUE;
 
 
 -- INSERT INTO MyColumns (id, Last, First) VALUES ('1', 'Doe', 'John');

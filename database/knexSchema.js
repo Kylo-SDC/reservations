@@ -19,8 +19,8 @@ const options = {
 
 const knex = require('knex')(options);
 
-knex.schema.dropTableIfExists('reservations')
-  .createTable('reservations', (table) => {
+knex.schema.dropTableIfExists('reservationss')
+  .createTable('reservationss', (table) => {
     table.increments('id');
     table.integer('restaurantId').notNullable();
     table.dateTime('dateTime', { useTz: false });
