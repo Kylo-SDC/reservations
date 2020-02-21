@@ -11,14 +11,12 @@ CREATE TABLE IF NOT EXISTS reservations (
   id BIGINT,
   restaurantId BIGINT,
   dateTime TIMESTAMP,
-  PRIMARY KEY(id)
+  PRIMARY KEY((restaurantId) dateTime)
 );
 
 COPY reservations (id,restaurantId,dateTime)
 FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/reservationz.csv' WITH HEADER=TRUE;
 
-
--- INSERT INTO MyColumns (id, Last, First) VALUES ('1', 'Doe', 'John');
 
 
 -- SOURCE '/mydir/myfile.cql'

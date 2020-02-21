@@ -1,7 +1,10 @@
 const cassandra = require('cassandra-driver');
 
-// const client = new cassandra.Client({
-//   contactPoints: ['h1', 'h2'],
-//   localDataCenter: 'datacenter1',
-//   keyspace: 'ks1'
-// });
+
+const client = new cassandra.Client({
+  contactPoints: ['localhost'],
+  localDataCenter: 'datacenter1',
+  keyspace: 'reservations'
+});
+
+client.connect();
