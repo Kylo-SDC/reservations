@@ -33,7 +33,7 @@ const getReservations = async (restaurantId, dateTime, callback) => {
   );
 };
 
-// new DB methods
+// mySQL methods
 
 const getReservation = (id, callback) => {
   const queryStr = 'SELECT * FROM reservation WHERE id = ?';

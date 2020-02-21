@@ -9,8 +9,9 @@ CREATE TABLE reservations (
 
 )
 
-COPY reservations(id, restaurantId, dateTime)
-FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/CVSpsql.csv' DELIMITER ',' CSV HEADER;
+
+-- COPY reservations(id, restaurantId, dateTime)
+-- FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/CVSpsql.csv' DELIMITER ',' CSV HEADER;
 
 -- psql postgresql://postgres:postgres@localhost/reservations -f schema.sql
 -- psql -f database/schema.sql reservations

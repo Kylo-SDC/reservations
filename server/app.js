@@ -1,7 +1,8 @@
 const cors = require('cors');
 const path = require('path');
 const express = require('express');
-const db = require('../database/index.js');
+const db = require('../database/postgres.js');
+// const db = require('../database/index.js');
 
 const app = express();
 
@@ -29,7 +30,8 @@ app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
 });
 
 app.get('/api/reservations/:id', (req, res) => {
-  db.getReservation(req.params.id, (err, results) => {
+  console.log(req.params);
+  db.getRestaurantId(req.params.id, (err, results) => {
     if (err) {
       console.log('error getting reservation!', err);
     } else {

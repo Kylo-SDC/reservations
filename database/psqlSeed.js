@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-const writable = fs.createWriteStream('reservations.csv');
+const writable = fs.createWriteStream('CVcdsafdsSpsql.csv');
 writable.write('id, restaurantId, dateTime \n');
 
-const seedCVS = async (restaurantId = 10000000, days = 1, reservations = 30, id = 0) => {
+const seedCVS = async (restaurantId = 100, days = 1, reservations = 30, id = 0) => {
   for (let i = 1; i <= restaurantId; i += 1) {
     const dateTime = new Date();
     dateTime.setDate(dateTime.getDate() - 1);

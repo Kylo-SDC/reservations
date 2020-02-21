@@ -14,10 +14,12 @@ const generateTime = () => {
 
 const generateRestaurants = (restaurantsNum) => {
 
-  // run one more iteration on final
+  // Add one more for last iteration
   const totalRestaurants = restaurantsNum + 1;
-  // write to location reservations.csv
+  // write to location
   const writeReservations = fs.createWriteStream('CVScass.csv');
+  // write headers (id, restaurantId, dateTime)
+  writeReservations.write(`id, restaurantId, dateTime \n`);
   // set restaurant id to the input value passed into the function later to be consumed
   let restaurantId = 1;
   // set number of reservations created per restaurant ID
@@ -25,8 +27,6 @@ const generateRestaurants = (restaurantsNum) => {
   let reservationsId = 1;
   // set boolean to track whether can write to file
   let canWrite = true;
-  // write headers (id, restaurantId, dateTime)
-  writeReservations.write(`id, restaurantId, dateTime \n`);
 
 
   const generateData = () => {
