@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const db = require('../database/postgres.js');
 // const db = require('../database/index.js');
-
+const { pool } = require('../database/postgres.js');
 const app = express();
 
 
@@ -18,22 +18,22 @@ app.get('/?id=:restaurantId', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
-app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
-  console.log(req.params.dateTime);
-  db.getReservations(
-    req.params.restaurantId,
-    req.params.dateTime,
-    (err, result) => {
-      res.json(result);
-    },
-  );
-});
+// app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
+//   console.log(req.params.dateTime);
+//   db.getReservations(
+//     req.params.restaurantId,
+//     req.params.dateTime,
+//     (err, result) => {
+//       res.json(result);
+//     },
+//   );
+// });
 
-app.get('/api/reservations/:id', (req, res) => {
+app.get('/api/reservations/:restaurantId', (req, res) => {
   console.log(req.params);
-  db.getRestaurantId(req.params.id, (err, results) => {
+  db.getRestaurantId(req.params.restaurantId, (err, results) => {
     if (err) {
-      console.log('error getting reservation!', err);
+      console.log('error getting restaurantId!', err);
     } else {
       res.status(200).json(results);
     }
