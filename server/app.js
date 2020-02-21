@@ -18,16 +18,17 @@ app.get('/?id=:restaurantId', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
-// app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
-//   console.log(req.params.dateTime);
-//   db.getReservations(
-//     req.params.restaurantId,
-//     req.params.dateTime,
-//     (err, result) => {
-//       res.json(result);
-//     },
-//   );
-// });
+app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
+  console.log(req.params);
+  console.log(req.params.dateTime);
+  db.getReservations(
+    req.params.restaurantId,
+    req.params.dateTime,
+    (err, result) => {
+      res.json(result);
+    },
+  );
+});
 
 app.get('/api/reservations/:restaurantId', (req, res) => {
   console.log(req.params);
@@ -41,7 +42,7 @@ app.get('/api/reservations/:restaurantId', (req, res) => {
 });
 
 app.post('/api/reservations/', (req, res) => {
-  db.postReservation(req.body.restaurantId, req.body.dateTime, (err, results) => {
+  db.postReservation(req.body.id, req.body.restaurantId, req.body.dateTime, (err, results) => {
     if (err) {
       console.log('error posting reservation', err);
     } else {
@@ -51,7 +52,7 @@ app.post('/api/reservations/', (req, res) => {
 });
 
 app.put('/api/reservations/:id', (req, res) => {
-  db.updateReservation(req.params.id, req.body.dateTime, (err, results) => {
+  db.updateReservation(req.body.dateTime, req.params.id, (err, results) => {
     if (err) {
       console.log('error updating reservation');
     } else {

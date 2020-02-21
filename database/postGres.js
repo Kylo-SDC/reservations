@@ -13,20 +13,32 @@ pool.connect();
 //   pool.end();
 // });
 
+const getReservations = async (restaurantId, dateTime, callback) => {
+  const dayStart = new Date(dateTime);
+  dayStart.setHours(0, 0, 0, 0);
+
+  const dayEnd = new Date(dayStart);
+  dayEnd.setHours(23, 45, 0, 0);
+
+  const queryStr = 'SELECT * FROM reservation WHERE restaurantId = $1 AND dateTime BETWEEN $2 and $3;';
+  pool.query(
+    queryStr,
+    [restaurantId, dayStart, dayEnd],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        callback(error);
+      } else {
+        callback(null, results.rows.map((data) => data.dateTime));
+      }
+    },
+  );
+};
+
 
 const getRestaurantId = (restaurantId, callback) => {
   const queryStr = 'SELECT * FROM reservations WHERE restaurantId = $1';
   pool.query(queryStr, [restaurantId], (error, results) => {
-    if (error) {
-      callback(error, null);
-    }
-    callback(null, results.rows);
-  });
-};
-
-const postReservation = (restaurantId, dateTime, callback) => {
-  const queryStr = 'INSERT INTO reservations (restaurantId, dateTime) VALUES ($1, $2)';
-  pool.query(queryStr, [restaurantId, dateTime], (error, results) => {
     if (error) {
       console.error(error);
       callback(error);
@@ -35,7 +47,18 @@ const postReservation = (restaurantId, dateTime, callback) => {
   });
 };
 
-const updateReservation = (id, newDateTime, callback) => {
+const postReservation = (id, restaurantId, dateTime, callback) => {
+  const queryStr = 'INSERT INTO reservations (id, restaurantId, dateTime) VALUES ($1, $2, $3)';
+  pool.query(queryStr, [id, restaurantId, dateTime], (error, results) => {
+    if (error) {
+      console.error(error);
+      callback(error);
+    }
+    callback(null, results.rows);
+  });
+};
+
+const updateReservation = (newDateTime, id, callback) => {
   const queryStr = 'UPDATE reservations SET dateTime = $1 WHERE id = $2';
   pool.query(queryStr, [newDateTime, id], (error, results) => {
     if (error) {
@@ -61,6 +84,7 @@ const deleteReservation = (id, callback) => {
 // module.exports = { pool };
 
 module.exports = {
+  getReservations,
   getRestaurantId,
   postReservation,
   updateReservation,
