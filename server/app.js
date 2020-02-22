@@ -1,9 +1,9 @@
+require('newrelic');
 const cors = require('cors');
 const path = require('path');
 const express = require('express');
 const db = require('../database/postgres.js');
 // const db = require('../database/index.js');
-const { pool } = require('../database/postgres.js');
 const app = express();
 
 
@@ -19,8 +19,6 @@ app.get('/?id=:restaurantId', (req, res) => {
 });
 
 app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
-  console.log(req.params);
-  console.log(req.params.dateTime);
   db.getReservations(
     req.params.restaurantId,
     req.params.dateTime,

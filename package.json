@@ -59,6 +59,7 @@
     "jest-puppeteer": "^4.4.0",
     "knex": "^0.20.10",
     "mysql": "^2.18.1",
+    "newrelic": "^6.4.1",
     "nodemon": "^2.0.2",
     "pg": "^7.18.1",
     "prop-types": "^15.7.2",

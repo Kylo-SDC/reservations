@@ -23,6 +23,10 @@ const getReservations = async (restaurantId, dateTime, callback) => {
     select,
     [restaurantId, dayStart, dayEnd],
     (error, results) => {
+      var one = results.map((data)=>data.dateTime);
+      console.log(one);
+      // console.log(Object.values(results));
+      // console.log('this is mySQL query', results.map((data)=>data.dateTime));
       if (error) {
         console.error(error);
         callback(error);

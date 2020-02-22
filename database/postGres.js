@@ -20,7 +20,7 @@ const getReservations = async (restaurantId, dateTime, callback) => {
   const dayEnd = new Date(dayStart);
   dayEnd.setHours(23, 45, 0, 0);
 
-  const queryStr = 'SELECT * FROM reservation WHERE restaurantId = $1 AND dateTime BETWEEN $2 and $3;';
+  const queryStr = 'SELECT * FROM reservations WHERE restaurantId = $1 AND dateTime BETWEEN $2 and $3;';
   pool.query(
     queryStr,
     [restaurantId, dayStart, dayEnd],
@@ -29,7 +29,7 @@ const getReservations = async (restaurantId, dateTime, callback) => {
         console.error(error);
         callback(error);
       } else {
-        callback(null, results.rows.map((data) => data.dateTime));
+        callback(null, results.rows.map((data) => data.datetime));
       }
     },
   );
