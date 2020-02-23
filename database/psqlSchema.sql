@@ -1,19 +1,21 @@
 
-DROP TABLE IF EXISTS reservations;
+-- DROP TABLE IF EXISTS reservations;
 
-CREATE TABLE reservations (
+-- CREATE TABLE reservations (
 
-  id BIGINT PRIMARY KEY,
-  restaurantId BIGINT NOT NULL,
-  dateTime TIMESTAMP NOT NULL
+--   id BIGINT PRIMARY KEY,
+--   restaurantId BIGINT NOT NULL,
+--   dateTime TIMESTAMP NOT NULL
 
-)
+-- )
 
 
--- COPY reservations(id, restaurantId, dateTime)
--- FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/CVSpsql.csv' DELIMITER ',' CSV HEADER;
+COPY reservationss(id, restaurantId, dateTime)
+FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/meow.csv' DELIMITER ',' CSV HEADER;
 
--- psql postgresql://postgres:postgres@localhost/reservations -f schema.sql
+-- CREATE INDEX restIdIndex ON reservations (restaurantId);
+
+-- psql postgresql://postgres:postgres@localhost/reservations -f psqlSchema.sql
 -- psql -f database/schema.sql reservations
 -- psql -h localhost -d reservations -U postgres -p 5432 -a -q -f schema.sql reservations
 

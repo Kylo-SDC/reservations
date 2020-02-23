@@ -24,7 +24,7 @@ const options = {
 
 const knex = require('knex')(options);
 
-const seed = async (restaurantId = 10000000, days = 1, reservations = 30) => {
+const seed = async (restaurantId = 10, days = 1, reservations = 30) => {
   await knex('reservationss').del();
 
   let reservationsArray = [];
@@ -40,13 +40,13 @@ const seed = async (restaurantId = 10000000, days = 1, reservations = 30) => {
         dateTime.setMinutes(dateTime.getMinutes() + 15);
         // reservation times randomly spread throughout the day
         if (Math.random() > 0.5) {
-          reservationsArray.push({ restaurantId: i, dateTime: new Date(dateTime).toISOString() });
+          reservationsArray.push({ restaurantId: i, dateTime: new Date(dateTime) });
         }
         // write to file with upon every 10000 items in reservations array
-        if (i % 10000 === 0) {
+        // if (i % 10000 === 0) {
           await knex('reservationss').insert(reservationsArray);
           reservations = [];
-        }
+        // }
       }
     }
   }

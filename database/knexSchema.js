@@ -21,9 +21,9 @@ const knex = require('knex')(options);
 
 knex.schema.dropTableIfExists('reservationss')
   .createTable('reservationss', (table) => {
-    table.increments('id');
-    table.integer('restaurantId').notNullable();
-    table.dateTime('dateTime', { useTz: false });
+    table.integer('id');
+    table.integer('restaurantid').notNullable();
+    table.dateTime('datetime', { useTz: false });
   })
   .then(() => console.log('table created'))
   .catch((err) => {

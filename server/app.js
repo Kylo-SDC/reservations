@@ -19,6 +19,7 @@ app.get('/?id=:restaurantId', (req, res) => {
 });
 
 app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
+  // console.log(req.params);
   db.getReservations(
     req.params.restaurantId,
     req.params.dateTime,
