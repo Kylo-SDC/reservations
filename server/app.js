@@ -1,4 +1,4 @@
-require('newrelic');
+// require('newrelic');
 const cors = require('cors');
 const path = require('path');
 const express = require('express');
@@ -14,16 +14,16 @@ app.use(express.json());
 app.use(cors());
 
 
-app.get('/?id=:restaurantId', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});
+// app.get('/?id=:restaurantId', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+// });
 
 app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
   db.getReservations(
     req.params.restaurantId,
     req.params.dateTime,
     (err, result) => {
-      // console.log(result);
+      console.log(result);
       res.json(result);
     },
   );
@@ -42,7 +42,7 @@ app.get('/api/reservations/:restaurantId', (req, res) => {
 
 app.post('/api/reservations/', (req, res) => {
   db.postReservation(req.body.id, req.body.restaurantId, req.body.dateTime, (err, results) => {
-    // console.log(req.body);
+    console.log(req.body);
     if (err) {
       console.log('error posting reservation', err);
     } else {
