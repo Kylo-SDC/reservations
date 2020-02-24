@@ -8,4 +8,5 @@ reservationz.csv
 .env
 newrelic_agent.log
 server/newrelic_agent.log
-CVSpsql.csv
+CSVpsql.csv
+CSV.csv

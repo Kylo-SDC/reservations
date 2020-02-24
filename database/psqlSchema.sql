@@ -3,15 +3,15 @@
 
 -- CREATE TABLE reservations (
 
---   id BIGINT PRIMARY KEY,
---   restaurantId BIGINT NOT NULL,
---   dateTime TIMESTAMP NOT NULL
+--   id BIGINT,
+--   restaurantId BIGINT,
+--   dateTime TIMESTAMP
 
 -- )
 
 
-COPY reservationss(id, restaurantId, dateTime)
-FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/meow.csv' DELIMITER ',' CSV HEADER;
+COPY reservations(id, restaurantId, dateTime)
+FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/CVS.csv' DELIMITER ',' CSV HEADER;
 
 -- CREATE INDEX restIdIndex ON reservations (restaurantId);
 

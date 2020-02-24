@@ -1,17 +1,7 @@
-// var moment = require('moment');
-// moment().format();
 /* eslint-disable max-len */
 const fs = require('fs');
 
-// Not good enough
-// const generateTime = () => {
-//   const hour = Math.floor(Math.random() * 24).toString().padStart(2, '0');
-//   const min = [0, 15, 30, 45][Math.floor(Math.random() * 4)].toString().padStart(2, '0');
-
-//   return `${hour}:${min}:00`;
-// };
-
-// // alternate
+// // alternate random hour generator, better suited for applying exact percentages per element
 // // each hour in the day where restaurants take reservations, military time
 // const times = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 // // assign a value per time, respectively, in terms of popularity with 3 being the highest
@@ -50,18 +40,18 @@ const randomDate = (addDays = 2) => {
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth();
-  const day = date.getDate() + Math.floor(Math.random() * addDays);
+  const day = date.getDate() + Math.floor(Math.random() * addDays); // how many days in advance of data to be collected
   const hour = randomHour();
   const min = [0, 15, 30, 45][Math.floor(Math.random() * 4)];
 
+  // remove time zone so database can properly accept data
   return new Date(year, month, day, hour, min).toString().slice(0, 24);
 };
 
-const generateRestaurants = (restaurantsNum) => {
-  // Add one more for last iteration
+const generateRestaurants = (restaurantsNum = 10000000) => {
+  // Add one more to get a final even iteration
   const totalRestaurants = restaurantsNum + 1;
-  // write to location
-  const writeReservations = fs.createWriteStream('CVS.csv');
+  const writeReservations = fs.createWriteStream('CSV.csv');
   // write headers (id, restaurantId, dateTime)
   writeReservations.write('id, restaurantId, dateTime \n');
   // set restaurant id to the input value passed into the function later to be consumed
@@ -85,7 +75,7 @@ const generateRestaurants = (restaurantsNum) => {
       reservationsId += 1;
       // decrement number of reservations per restaurant with each iteration
       reservationsNum -= 1;
-      // after all reservations have been assigned to a given restaurantId, then we decrement restaurantId
+      // after all reservations have been assigned to a given restaurantId, then we increment restaurantId
       if (reservationsNum === 0) {
         restaurantId += 1;
         // reestablish number of reservations to be assigned to the next restaurantID
@@ -113,4 +103,4 @@ const generateRestaurants = (restaurantsNum) => {
 
 // begin timer on seed function
 console.time('reservation');
-generateRestaurants(100);
+generateRestaurants();

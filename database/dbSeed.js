@@ -9,9 +9,6 @@ require('dotenv').config();
 //   },
 // };
 
-
-const date = new Date().toISOString().slice(0, 10);
-
 const options = {
   client: 'pg',
   connection: {
@@ -45,7 +42,7 @@ const seed = async (restaurantId = 10, days = 1, reservations = 30) => {
         // write to file with upon every 10000 items in reservations array
         // if (i % 10000 === 0) {
           await knex('reservationss').insert(reservationsArray);
-          reservations = [];
+          reservationsArray = [];
         // }
       }
     }

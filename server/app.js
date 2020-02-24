@@ -42,6 +42,7 @@ app.get('/api/reservations/:restaurantId', (req, res) => {
 
 app.post('/api/reservations/', (req, res) => {
   db.postReservation(req.body.id, req.body.restaurantId, req.body.dateTime, (err, results) => {
+    console.log(req.body);
     if (err) {
       console.log('error posting reservation', err);
     } else {
