@@ -14,16 +14,16 @@ app.use(express.json());
 app.use(cors());
 
 
-// app.get('/?id=:restaurantId', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-// });
+app.get('/?id=:restaurantId', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 
 app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
   db.getReservations(
     req.params.restaurantId,
     req.params.dateTime,
     (err, result) => {
-      console.log(result);
+      // console.log(result);
       res.json(result);
     },
   );

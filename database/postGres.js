@@ -26,9 +26,9 @@ const getReservations = async (restaurantId, dateTime, callback) => {
     queryStr,
     [restaurantId, dayStart, dayEnd],
     (error, results) => {
-      // Had to change dates to numerical form first, filter out duplicates, change back to dates, can't directly compare date objects as being equal
+      // change dates to numerical form first, filter out duplicates, change back to dates, can't directly compare date objects
       // const uniqueDates = [...new Set(results.rows.map((e) => e.datetime.getTime()))].map((e) => new Date(e));
-      console.log(results);
+      // console.log(results);
       const datetimes = results.rows.map((data) => data.datetime);
       if (error) {
         console.error(error);
