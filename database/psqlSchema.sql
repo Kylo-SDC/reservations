@@ -10,8 +10,8 @@
 -- )
 
 
-COPY reservations(id, restaurantId, dateTime)
-FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/CVS.csv' DELIMITER ',' CSV HEADER;
+-- COPY reservations(id, restaurantId, dateTime)
+-- FROM '/mnt/c/Users/epyon/Documents/Hack/reservations/database/CSVsql.csv' DELIMITER ',' CSV HEADER;
 
 -- CREATE INDEX restIdIndex ON reservations (restaurantId);
 

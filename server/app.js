@@ -19,18 +19,18 @@ app.get('/?id=:restaurantId', (req, res) => {
 });
 
 app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
-  // console.log(req.params);
   db.getReservations(
     req.params.restaurantId,
     req.params.dateTime,
     (err, result) => {
+      // console.log(result);
       res.json(result);
     },
   );
 });
 
 app.get('/api/reservations/:restaurantId', (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   db.getRestaurantId(req.params.restaurantId, (err, results) => {
     if (err) {
       console.log('error getting restaurantId!', err);
@@ -42,7 +42,7 @@ app.get('/api/reservations/:restaurantId', (req, res) => {
 
 app.post('/api/reservations/', (req, res) => {
   db.postReservation(req.body.id, req.body.restaurantId, req.body.dateTime, (err, results) => {
-    console.log(req.body);
+    // console.log(req.body);
     if (err) {
       console.log('error posting reservation', err);
     } else {

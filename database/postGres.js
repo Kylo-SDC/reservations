@@ -27,13 +27,14 @@ const getReservations = async (restaurantId, dateTime, callback) => {
     [restaurantId, dayStart, dayEnd],
     (error, results) => {
       // Had to change dates to numerical form first, filter out duplicates, change back to dates, can't directly compare date objects as being equal
-      const uniqueDates = [...new Set(results.rows.map((e) => e.datetime.getTime()))].map((e) => new Date(e));
-      // const datetimes = results.rows.map((data) => data.datetime);
+      // const uniqueDates = [...new Set(results.rows.map((e) => e.datetime.getTime()))].map((e) => new Date(e));
+      console.log(results);
+      const datetimes = results.rows.map((data) => data.datetime);
       if (error) {
         console.error(error);
         callback(error);
       } else {
-        callback(null, uniqueDates);
+        callback(null, datetimes);
       }
     },
   );
@@ -54,7 +55,7 @@ const getRestaurantId = (restaurantId, callback) => {
 const postReservation = (id, restaurantId, dateTime, callback) => {
   const queryStr = 'INSERT INTO reservations (id, restaurantId, dateTime) VALUES ($1, $2, $3)';
   pool.query(queryStr, [id, restaurantId, dateTime], (error, results) => {
-    console.log(results.rows);
+    // console.log(results.rows);
     if (error) {
       console.error(error);
       callback(error);
@@ -77,7 +78,7 @@ const updateReservation = (newDateTime, id, callback) => {
 const deleteReservation = (id, callback) => {
   const queryStr = 'DELETE FROM reservations WHERE id = $1 ';
   pool.query(queryStr, [id], (error, results) => {
-    console.log(results);
+    // console.log(results);
     if (error) {
       console.error(error);
       callback(error);
