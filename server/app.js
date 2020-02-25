@@ -2,7 +2,7 @@
 const cors = require('cors');
 const path = require('path');
 const express = require('express');
-const db = require('../database/postgres.js');
+const db = require('../database/postGres.js');
 // const db = require('../database/index.js');
 const app = express();
 
@@ -21,10 +21,14 @@ app.get('/?id=:restaurantId', (req, res) => {
 app.get('/api/reservations/:restaurantId/dateTime/:dateTime', (req, res) => {
   db.getReservations(
     req.params.restaurantId,
-    req.params.dateTime,
-    (err, result) => {
+    Number(req.params.dateTime),
+    (err, results) => {
+      if (err) {
+        console.log('err getting restaurantids & datetimes', err);
+        res.status(400).json(err);
+      }
       // console.log(result);
-      res.json(result);
+      res.status(200).json(results);
     },
   );
 });

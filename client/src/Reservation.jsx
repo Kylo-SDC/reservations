@@ -10,8 +10,11 @@ const Reservation = ({ restaurantId }) => {
   const [taken, setTaken] = useState(0);
   const [dateTime] = useState(new Date());
 
-  fetch(`/api/reservations/${restaurantId}/dateTime/${encodeURIComponent(dateTime)}`)
-    .then((response) => response.json())
+  fetch(`/api/reservations/${restaurantId}/dateTime/${Number(dateTime)}`)
+    .then((response) => {
+      // console.log(response.url);
+      response.json();
+    })
     .then((myJson) => setTaken(myJson.length));
 
   function formatAMPM(date) {
@@ -26,7 +29,7 @@ const Reservation = ({ restaurantId }) => {
   }
 
   function findTable() {
-    fetch(`/api/reservations/${restaurantId}/dateTime/${encodeURIComponent(dateTime)}`)
+    fetch(`/api/reservations/${restaurantId}/dateTime/${Number(dateTime)}`)
       .then((response) => response.json())
       .then((myJson) => {
         const minusHourFifteen = new Date(dateTime);

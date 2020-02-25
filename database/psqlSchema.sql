@@ -1,13 +1,13 @@
 
--- DROP TABLE IF EXISTS reservations;
+DROP TABLE IF EXISTS reservations;
 
--- CREATE TABLE reservations (
+CREATE TABLE reservations (
 
---   id BIGINT,
---   restaurantId BIGINT,
---   dateTime TIMESTAMP
+  id BIGINT,
+  restaurantId BIGINT,
+  dateTime TIMESTAMP
 
--- )
+)
 
 
 -- COPY reservations(id, restaurantId, dateTime)
