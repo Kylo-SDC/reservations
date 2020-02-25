@@ -137,7 +137,7 @@ const Reservation = ({ restaurantId }) => {
                 {slots.length === 0 ? (
                   <div className="time-slot-none">
                     <div>
-                      <img className="icon" src="http://localhost:4444/ic_negative.svg" />
+                      <img className="icon" src="http://localhost:5555/ic_negative.svg" />
                     </div>
                     <div>
                       {'At the moment, there’s no online availability within 2.5 hours. '}
@@ -150,7 +150,7 @@ const Reservation = ({ restaurantId }) => {
         </div>
       </div>
       <div className="booked-box">
-        <img className="icon" src="http://localhost:4444/ic_social_proof.svg" />
+        <img className="icon" src="http://localhost:5555/ic_social_proof.svg" />
         <div className="reservation-booked">{`Booked ${taken} times today`}</div>
       </div>
       <div className="specials">
