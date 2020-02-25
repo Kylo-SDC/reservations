@@ -5,7 +5,7 @@ moment().format();
 const writable = fs.createWriteStream('CSVsql.csv');
 writable.write('id, restaurantId, dateTime \n');
 
-const seedCVS = async (restaurantId = 10000000, days = 1, reservations = 30, id = 0) => {
+const seedCVS = async (restaurantId = 10, days = 1, reservations = 30, id = 0) => {
   for (let i = 1; i <= restaurantId; i += 1) {
     const dateTime = new Date();
     dateTime.setDate(dateTime.getDate() - 1);

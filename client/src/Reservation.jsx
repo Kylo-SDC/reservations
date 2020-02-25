@@ -10,9 +10,9 @@ const Reservation = ({ restaurantId }) => {
   const [taken, setTaken] = useState(0);
   const [dateTime] = useState(new Date());
 
-  fetch(`/api/reservations/${restaurantId}/dateTime/${Number(dateTime)}`)
+  fetch(`/api/reservations/${restaurantId}`)
     .then((response) => {
-      // console.log(response.url);
+      console.log(response);
       response.json();
     })
     .then((myJson) => setTaken(myJson.length));
@@ -29,7 +29,7 @@ const Reservation = ({ restaurantId }) => {
   }
 
   function findTable() {
-    fetch(`/api/reservations/${restaurantId}/dateTime/${Number(dateTime)}`)
+    fetch(`/api/reservations/${restaurantId}`)
       .then((response) => response.json())
       .then((myJson) => {
         const minusHourFifteen = new Date(dateTime);

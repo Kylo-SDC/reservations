@@ -39,11 +39,13 @@ const getReservations = async (restaurantId, dateTime, callback) => {
 const getRestaurantId = (restaurantId, callback) => {
   const queryStr = 'SELECT * FROM reservations WHERE restaurantId = $1';
   pool.query(queryStr, [restaurantId], (error, results) => {
+    const datetimes = results.rows.map((data) => data.datetime);
+    // console.log(results.rows.map((data) => data.datetime));
     if (error) {
       console.error(error);
       callback(error);
     }
-    callback(null, results.rows);
+    callback(null, datetimes);
   });
 };
 
